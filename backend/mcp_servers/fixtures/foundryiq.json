@@ -1,0 +1,28 @@
+{
+  "ai_resources": [
+    {"subscription_id": "aaaa-1111", "subscription_name": "Prod-AI", "name": "aoai-eastus-prod", "kind": "OpenAI", "location": "eastus", "sku": "S0"},
+    {"subscription_id": "aaaa-1111", "subscription_name": "Prod-AI", "name": "aoai-westus-prod", "kind": "OpenAI", "location": "westus2", "sku": "S0"},
+    {"subscription_id": "aaaa-1111", "subscription_name": "Prod-AI", "name": "ai-services-prod", "kind": "AIServices", "location": "eastus", "sku": "S0"},
+    {"subscription_id": "aaaa-1111", "subscription_name": "Prod-AI", "name": "aoai-ptu-prod", "kind": "OpenAI", "location": "eastus2", "sku": "ProvisionedManaged"},
+    {"subscription_id": "bbbb-2222", "subscription_name": "Dev-AI", "name": "aoai-eastus-dev", "kind": "OpenAI", "location": "eastus", "sku": "S0"},
+    {"subscription_id": "bbbb-2222", "subscription_name": "Dev-AI", "name": "ai-services-dev", "kind": "AIServices", "location": "westus", "sku": "S0"},
+    {"subscription_id": "bbbb-2222", "subscription_name": "Dev-AI", "name": "aoai-sweden-dev", "kind": "OpenAI", "location": "swedencentral", "sku": "S0"},
+    {"subscription_id": "cccc-3333", "subscription_name": "Sandbox", "name": "aoai-sandbox", "kind": "OpenAI", "location": "eastus", "sku": "S0"},
+    {"subscription_id": "cccc-3333", "subscription_name": "Sandbox", "name": "ai-services-sandbox", "kind": "AIServices", "location": "eastus", "sku": "S0"}
+  ],
+  "token_usage": {
+    "aaaa-1111": {"subscription_name": "Prod-AI", "prompt_tokens": 18800000, "completion_tokens": 9300000, "total_tokens": 28100000},
+    "bbbb-2222": {"subscription_name": "Dev-AI", "prompt_tokens": 7000000, "completion_tokens": 3500000, "total_tokens": 10500000},
+    "cccc-3333": {"subscription_name": "Sandbox", "prompt_tokens": 2600000, "completion_tokens": 1400000, "total_tokens": 4000000}
+  },
+  "transactions": {
+    "aaaa-1111": {"subscription_name": "Prod-AI", "standard_calls": 142000, "ptu_processed": 85000},
+    "bbbb-2222": {"subscription_name": "Dev-AI", "standard_calls": 53000, "ptu_processed": 0},
+    "cccc-3333": {"subscription_name": "Sandbox", "standard_calls": 18000, "ptu_processed": 0}
+  },
+  "subscription_costs": {
+    "aaaa-1111": {"subscription_name": "Prod-AI", "cost_usd": 5480.00, "currency": "USD"},
+    "bbbb-2222": {"subscription_name": "Dev-AI", "cost_usd": 2040.50, "currency": "USD"},
+    "cccc-3333": {"subscription_name": "Sandbox", "cost_usd": 800.00, "currency": "USD"}
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "message_usage": {
+    "period": "2026-04",
+    "total_messages_consumed": 15230,
+    "billed_messages": 12800,
+    "included_in_license": 10000,
+    "overage_messages": 2800,
+    "agents": 14
+  },
+  "agents": [
+    {"name": "IT Helpdesk Bot", "environment": "default", "last_active": "2026-04-22", "messages_30d": 4320},
+    {"name": "HR FAQ Agent", "environment": "default", "last_active": "2026-04-21", "messages_30d": 3100},
+    {"name": "Sales Copilot", "environment": "sales-prod", "last_active": "2026-04-22", "messages_30d": 2810},
+    {"name": "Onboarding Assistant", "environment": "default", "last_active": "2026-04-19", "messages_30d": 1890},
+    {"name": "Finance Report Bot", "environment": "finance", "last_active": "2026-04-20", "messages_30d": 1200},
+    {"name": "Legal Contract Reviewer", "environment": "legal", "last_active": "2026-04-18", "messages_30d": 640},
+    {"name": "Marketing Content Agent", "environment": "marketing", "last_active": "2026-04-22", "messages_30d": 520},
+    {"name": "Facilities Bot", "environment": "default", "last_active": "2026-04-15", "messages_30d": 310},
+    {"name": "Customer Support Tier 1", "environment": "support", "last_active": "2026-04-22", "messages_30d": 200},
+    {"name": "Engineering Docs Bot", "environment": "eng", "last_active": "2026-04-17", "messages_30d": 120},
+    {"name": "Compliance Agent", "environment": "legal", "last_active": "2026-04-14", "messages_30d": 60},
+    {"name": "Travel Assistant", "environment": "default", "last_active": "2026-04-10", "messages_30d": 30},
+    {"name": "Test Bot Alpha", "environment": "sandbox", "last_active": "2026-04-08", "messages_30d": 20},
+    {"name": "Test Bot Beta", "environment": "sandbox", "last_active": "2026-04-05", "messages_30d": 10}
+  ]
+}

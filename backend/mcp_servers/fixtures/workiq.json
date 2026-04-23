@@ -1,0 +1,21 @@
+{
+  "copilot_usage_summary": {
+    "period": "D30",
+    "total_enabled_users": 1240,
+    "total_active_users": 876,
+    "total_prompts": 34521,
+    "snapshot_date": "2026-04-22"
+  },
+  "copilot_user_detail": [
+    {"user_principal_name": "alex@contoso.com", "display_name": "Alex Johnson", "last_activity_date": "2026-04-22", "teams_prompts": 120, "outlook_prompts": 85, "word_prompts": 42, "excel_prompts": 30, "ppt_prompts": 18},
+    {"user_principal_name": "jordan@contoso.com", "display_name": "Jordan Lee", "last_activity_date": "2026-04-21", "teams_prompts": 95, "outlook_prompts": 110, "word_prompts": 60, "excel_prompts": 15, "ppt_prompts": 25},
+    {"user_principal_name": "sam@contoso.com", "display_name": "Sam Rivera", "last_activity_date": "2026-04-20", "teams_prompts": 200, "outlook_prompts": 50, "word_prompts": 10, "excel_prompts": 5, "ppt_prompts": 0}
+  ],
+  "copilot_app_usage": [
+    {"app_name": "Teams", "prompts": 12430, "active_users": 654},
+    {"app_name": "Outlook", "prompts": 8910, "active_users": 502},
+    {"app_name": "Word", "prompts": 6340, "active_users": 389},
+    {"app_name": "Excel", "prompts": 4120, "active_users": 245},
+    {"app_name": "PowerPoint", "prompts": 2721, "active_users": 198}
+  ]
+}
