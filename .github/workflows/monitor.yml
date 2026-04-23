@@ -1,0 +1,100 @@
+name: Copilot & Azure AI Usage Monitor
+
+on:
+  schedule:
+    # Run daily at 08:00 UTC
+    - cron: "0 8 * * *"
+  workflow_dispatch:
+    inputs:
+      format:
+        description: "Output format (text, json, csv)"
+        required: false
+        default: "text"
+      since:
+        description: "Start date (YYYY-MM-DD)"
+        required: false
+      until:
+        description: "End date (YYYY-MM-DD)"
+        required: false
+      org:
+        description: "GitHub organization login"
+        required: false
+      enterprise:
+        description: "GitHub enterprise slug"
+        required: false
+
+permissions:
+  contents: read
+
+jobs:
+  monitor:
+    name: Collect and report usage
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Build CLI arguments
+        id: args
+        shell: bash
+        run: |
+          ARGS=""
+          # Format
+          FORMAT="${{ github.event.inputs.format || 'text' }}"
+          ARGS="$ARGS --format $FORMAT"
+          # Dates
+          if [ -n "${{ github.event.inputs.since }}" ]; then
+            ARGS="$ARGS --since ${{ github.event.inputs.since }}"
+          fi
+          if [ -n "${{ github.event.inputs.until }}" ]; then
+            ARGS="$ARGS --until ${{ github.event.inputs.until }}"
+          fi
+          # GitHub org / enterprise
+          if [ -n "${{ github.event.inputs.org }}" ]; then
+            ARGS="$ARGS --org ${{ github.event.inputs.org }}"
+          elif [ -n "${{ vars.GITHUB_ORG }}" ]; then
+            ARGS="$ARGS --org ${{ vars.GITHUB_ORG }}"
+          fi
+          if [ -n "${{ github.event.inputs.enterprise }}" ]; then
+            ARGS="$ARGS --enterprise ${{ github.event.inputs.enterprise }}"
+          elif [ -n "${{ vars.GITHUB_ENTERPRISE }}" ]; then
+            ARGS="$ARGS --enterprise ${{ vars.GITHUB_ENTERPRISE }}"
+          fi
+          # Azure
+          if [ -n "${{ vars.AZURE_SUBSCRIPTION_ID }}" ]; then
+            ARGS="$ARGS --subscription-id ${{ vars.AZURE_SUBSCRIPTION_ID }}"
+          fi
+          if [ -n "${{ vars.AZURE_RESOURCE_GROUP }}" ]; then
+            ARGS="$ARGS --resource-group ${{ vars.AZURE_RESOURCE_GROUP }}"
+          fi
+          if [ -n "${{ vars.AZURE_OPENAI_RESOURCE }}" ]; then
+            ARGS="$ARGS --openai-resource ${{ vars.AZURE_OPENAI_RESOURCE }}"
+          fi
+          # Output to file for upload
+          ARGS="$ARGS --output report.$FORMAT"
+          echo "cli_args=$ARGS" >> "$GITHUB_OUTPUT"
+          echo "format=$FORMAT" >> "$GITHUB_OUTPUT"
+
+      - name: Run monitor
+        env:
+          GITHUB_TOKEN: ${{ secrets.COPILOT_USAGE_TOKEN }}
+          AZURE_BEARER_TOKEN: ${{ secrets.AZURE_BEARER_TOKEN }}
+          PYTHONPATH: src
+        run: python src/main.py ${{ steps.args.outputs.cli_args }}
+
+      - name: Upload usage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: usage-report-${{ github.run_id }}
+          path: report.${{ steps.args.outputs.format }}
+          retention-days: 90
